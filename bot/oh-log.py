@@ -4,15 +4,18 @@ import os
 import time
 import subprocess
 from dhooks import Webhook
+from dotenv import load_dotenv
 
 if __name__ == "__main__":
+    # Load env file => os.environ
+    load_dotenv()
 
     # 対象ディレクトリ
     DIR_WATCH = '/srv/tagoken-craft/logs/'
     # 対象ファイル名のパターン
     PATTERNS = ['*.log']
-    
-    HOOK_URL = "https://discord.com/api/webhooks/XXX"
+
+    HOOK_URL = os.environ['WEBHOOK_URL']
     hook = Webhook(HOOK_URL)
 
     def on_modified(event):
